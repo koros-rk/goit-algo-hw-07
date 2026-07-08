@@ -1,4 +1,4 @@
-class UserNotFoundError(Exception):
+class UserNotFoundError(ValueError):
     def __init__(self, name: str):
         self.message = f"User {name} not found"
 

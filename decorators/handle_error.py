@@ -2,6 +2,7 @@ from functools import wraps
 from typing import Callable
 
 from errors import (
+    BirthdayAlreadySetError,
     PhoneAlreadyExistsError,
     PhoneNotFoundError,
     UserNotFoundError,
@@ -23,6 +24,8 @@ def handle_error():
             except PhoneNotFoundError as e:
                 return e.message
             except PhoneAlreadyExistsError as e:
+                return e.message
+            except BirthdayAlreadySetError as e:
                 return e.message
 
             except ValueError or IndexError:

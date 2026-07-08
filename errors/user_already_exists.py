@@ -1,4 +1,4 @@
-class UserAlreadyExistsError(Exception):
+class UserAlreadyExistsError(ValueError):
     def __init__(self, phone: str):
         self.message = f"User {phone} already exists"
 

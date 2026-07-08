@@ -1,3 +1,4 @@
+from .birthday_already_set import BirthdayAlreadySetError
 from .phone_already_exists import PhoneAlreadyExistsError
 from .phone_not_found import PhoneNotFoundError
 from .user_already_exists import UserAlreadyExistsError
@@ -10,4 +11,5 @@ __all__ = [
     "ValidationError",
     "PhoneAlreadyExistsError",
     "UserAlreadyExistsError",
+    "BirthdayAlreadySetError"
 ]

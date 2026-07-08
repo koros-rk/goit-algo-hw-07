@@ -1,4 +1,4 @@
-class PhoneNotFoundError(Exception):
+class PhoneNotFoundError(ValueError):
     def __init__(self, phone: str):
         self.message = f"Phone {phone} not found"
 

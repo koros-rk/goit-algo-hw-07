@@ -2,19 +2,19 @@ from collections import UserDict
 from datetime import datetime, timedelta
 
 from entitites.record import Record
-from errors import UserAlreadyExistsError, UserNotFoundError
+from errors import UserNotFoundError
 
 
 class AddressBook(UserDict[str, Record]):
     def find(self, name: str):
         user = self.data.get(name.casefold())
-        if not user:
-            raise UserNotFoundError(name)
-        return user
+        if user:
+            return user
+        raise UserNotFoundError(name)
 
     def add_record(self, record: Record):
         key = record.name.value.casefold()
-        return self.data.update({key: record})
+        self.data.update({key: record})
 
     def delete_record(self, name: str):
         if name.casefold() in self.data:
@@ -27,15 +27,13 @@ class AddressBook(UserDict[str, Record]):
         today = datetime.today().date()
 
         for key, user in self.data.items():
-            user_birthday = user.birthday
-
-            if not user_birthday:
+            if not user.birthday:
                 continue
 
-            user_birthday.value = user_birthday.value.replace(year=today.year)
+            birthday = user.birthday.value.replace(year=today.year)
 
-            if 0 <= (user_birthday.value - today).days <= days:
-                adjusted_birthday = self.__adjust_for_weekend(user_birthday.value)
+            if 0 <= (birthday - today).days <= days:
+                adjusted_birthday = self.__adjust_for_weekend(birthday)
                 congratulation_date_str = self.__date_to_string(adjusted_birthday)
                 upcoming_birthdays.append(
                     {
