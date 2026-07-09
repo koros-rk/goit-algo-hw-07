@@ -4,8 +4,6 @@ from errors import ValidationError
 
 class Phone(Field):
     def __init__(self, value: str):
-
-        self.validate(value)
         super().__init__(value)
 
     @classmethod
