@@ -9,7 +9,7 @@ from actions import (
     show_birthdays,
     show_phones,
 )
-from entitites import AddressBook, Record
+from entitites import AddressBook
 
 HANDLERS = {
     "all": all,
