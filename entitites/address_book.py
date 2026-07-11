@@ -24,13 +24,14 @@ class AddressBook(UserDict[str, Record]):
 
     def get_upcoming_birthdays(self, days=7):
         upcoming_birthdays: list[dict] = []
-        today = datetime.today().date()
+        today = datetime.today()
 
         for key, user in self.data.items():
             if not user.birthday:
                 continue
 
-            birthday = user.birthday.value.replace(year=today.year)
+            birthday = datetime.strptime(user.birthday.value, "%d.%m.%Y")
+            birthday = birthday.replace(year=today.year)
 
             if 0 <= (birthday - today).days <= days:
                 adjusted_birthday = self.__adjust_for_weekend(birthday)
